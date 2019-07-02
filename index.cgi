@@ -1,4 +1,4 @@
-#!/mnt/berry/home/ueda/public_html/shopping-assistant/.venv/bin/python
+#!/mnt/berry_f/home/shibata/anaconda3/envs/python3-web/bin/python
 # -*- coding: utf-8 -*-
 
 import cgi
