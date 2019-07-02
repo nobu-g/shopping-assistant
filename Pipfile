@@ -10,7 +10,7 @@ numpy = "*"
 torch = "==1.1.0"
 bottle = "*"
 zenhan = "*"
-xmlrpc = "*"
+pyknp = "*"
 
 [requires]
 python_version = "3.6"

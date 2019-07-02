@@ -1,28 +1,41 @@
 #!/mnt/berry_f/home/shibata/anaconda3/envs/python3-web/bin/python
 # -*- coding: utf-8 -*-
 
-import cgi
-# import zenhan
-# import xmlrpc.client as xmlrpc_client
-# from masked_lm_conf import host, port, DEFAULT_SENTENCE
+import sys
+# import cgi
+import json
+import zenhan
+import xmlrpc.client as xmlrpc_client
+from ip_conf import host, port
 
 
 def main():
-    print("Content-Type: text/html")
+    print('Content-Type: text/plain')
     print()
 
-    print("<TITLE>CGI script output</TITLE>")
-    print("<H1>This is my first CGI script</H1>")
-    print("Hello, world!")
+    # print("<TITLE>CGI script output</TITLE>")
+    # print("<H1>This is my first CGI script</H1>")
+    print('Hello, world!')
 
-    # f = cgi.FieldStorage()
-    # sentence = f.getfirst('sentence', DEFAULT_SENTENCE)
-        
-    # if sentence is not None:
-    #     sentence = zenhan.h2z(sentence)
-        
-    # masked_lm_client = xmlrpc_client.ServerProxy('http://{}:{}'.format(host, port))
-    # # prediction = masked_lm_client.get_predictions(sentence)
+    raw_json = sys.stdin.read()
+    input_data = json.loads(raw_json)
+    # raw_json['key1'] = 'hoge'
+    # print()
+    # print(json.dumps(raw_json))
+    # print()
+
+    input_data = zenhan.h2z(input_data)
+
+    sentiment_analysis_client = xmlrpc_client.ServerProxy(f'http://{host}:{port}')
+    prediction = sentiment_analysis_client.get_prediction(input_data)  # 1(Pos) or -1(Neg)
+
+    if prediction == 1:
+        print('Positive')
+    elif prediction == -1:
+        print('Negative')
+    else:
+        print('None')
+
     # pid = os.getpid()
     # filename = "json/prediction_{}.json".format(pid)
     # with open(filename, mode='w', encoding='utf-8') as outfile:
