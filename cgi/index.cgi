@@ -1,4 +1,4 @@
-#!/orange/ubrew/data/bin/python3
+#!/orange/brew/data/bin/python3
 # -*- coding: utf-8 -*-
 # import cgitb
 #
